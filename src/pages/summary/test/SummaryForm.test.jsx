@@ -1,5 +1,6 @@
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen, } from "@testing-library/react";
 import SummaryForm from "../SummaryForm";
+import userEvent from '@testing-library/user-event';
 
 test("initial state of checkBox and Button", () => {
   render(<SummaryForm />);
@@ -16,10 +17,10 @@ test("initial state of Button after clicking Checkbox", () => {
     name: "I agree to Terms and Condition",
   });
   const button = screen.getByRole("button", { name: "Confirm order" });
-  fireEvent.click(checkBox);
+  userEvent.click(checkBox);
   expect(checkBox).toBeChecked();
   expect(button).toBeEnabled();
-  fireEvent.click(checkBox);
+  userEvent.click(checkBox);
   expect(checkBox).not.toBeChecked();
   expect(button).toBeDisabled();
 });
